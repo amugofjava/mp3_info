@@ -6,3 +6,7 @@
 
 - Add option to call processor with bytes.
 - Improved documentation.
+
+## 0.1.2
+
+- Corrected package description.
