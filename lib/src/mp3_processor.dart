@@ -12,15 +12,20 @@ import 'package:mp3_info/src/exceptions/invalid_file_exception.dart';
 import 'constants/client_constants.dart';
 import 'mp3.dart';
 
-/// This class handles the processing of an MP3 file. This version does not support
-/// ID3 tags and, for now, just reads enough of the ID3 header (if present) in order
-/// to discover the first frame of the MP3. From here we read the 10 byte frame header
-/// and break it down into its constituent parts: Frame sync, MPEG version, MPEG layer,
-/// bitrate, sample rate, channel count and CRC check. We also computer the duration.
+/// Processes an MP3 file extracting key metadata information. The current version
+/// does not support extracting metadata from ID3 tags.
 class MP3Processor {
+  /// Process the MP3 contained within the [File] instance.
   static MP3Info fromFile(File file) {
     Uint8List bytes = file.readAsBytesSync();
 
+    MP3Processor instance = MP3Processor();
+
+    return instance._processBytes(bytes);
+  }
+
+  /// Process the MP3 from a list of bytes
+  static MP3Info fromBytes(Uint8List bytes) {
     MP3Processor instance = MP3Processor();
 
     return instance._processBytes(bytes);
@@ -104,7 +109,7 @@ class MP3Processor {
     int sampleRate = (frameHeader[2] & mpegSampleRateMask) >> 2;
     SampleRate rate;
 
-    switch(sampleRate) {
+    switch (sampleRate) {
       case sample32:
         rate = SampleRate.rate_32000;
         break;
@@ -132,7 +137,7 @@ class MP3Processor {
     int channelMode = (frameHeader[3] & mpegChannelModeMask) >> 6;
     ChannelMode mode;
 
-    switch(channelMode) {
+    switch (channelMode) {
       case channelStereo:
         mode = ChannelMode.stereo;
         break;
@@ -186,7 +191,8 @@ class MP3Processor {
         duration,
       );
     } else {
-      throw InvalidMP3FileException('The file cannot be processed as it is not a valid MP3 file');
+      throw InvalidMP3FileException(
+          'The file cannot be processed as it is not a valid MP3 file');
     }
   }
 }

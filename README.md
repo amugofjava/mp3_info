@@ -1,4 +1,5 @@
-mp3_info parses an MP3 to extract key meta information such as MPEG version,
+# MP3 Info
+Processes an MP3 file to extract key meta information such as MPEG version,
 MPEG layer version, bitrate, sample rate and duration.
 
 ## Usage
