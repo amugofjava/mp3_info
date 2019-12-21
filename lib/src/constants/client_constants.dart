@@ -3,12 +3,14 @@
 // found in the LICENSE file.
 
 enum Version {
+  unknown,
   MPEG_1,
   MPEG_2,
   MPEG_2_5,
 }
 
 enum Layer {
+  unknown,
   MPEG_I,
   MPEG_II,
   MPEG_III,

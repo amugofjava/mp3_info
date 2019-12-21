@@ -17,16 +17,16 @@ import 'mp3.dart';
 class MP3Processor {
   /// Process the MP3 contained within the [File] instance.
   static MP3Info fromFile(File file) {
-    Uint8List bytes = file.readAsBytesSync();
+    final bytes = file.readAsBytesSync();
 
-    MP3Processor instance = MP3Processor();
+    final instance = MP3Processor();
 
     return instance._processBytes(bytes);
   }
 
   /// Process the MP3 from a list of bytes
   static MP3Info fromBytes(Uint8List bytes) {
-    MP3Processor instance = MP3Processor();
+    final instance = MP3Processor();
 
     return instance._processBytes(bytes);
   }
@@ -41,7 +41,7 @@ class MP3Processor {
     return headerSize + 10;
   }
 
-  _processMpegVersion(Uint8List frameHeader) {
+  Version _processMpegVersion(Uint8List frameHeader) {
     var version = frameHeader[1] & mpegVersionMask;
 
     switch (version) {
@@ -55,10 +55,12 @@ class MP3Processor {
         return Version.MPEG_2_5;
         break;
     }
+
+    return Version.unknown;
   }
 
-  _processMpegLayer(Uint8List frameHeader) {
-    int mpegLayer = frameHeader[1] & mpegLayerMask;
+  Layer _processMpegLayer(Uint8List frameHeader) {
+    final mpegLayer = frameHeader[1] & mpegLayerMask;
 
     switch (mpegLayer) {
       case layer1:
@@ -71,17 +73,19 @@ class MP3Processor {
         return Layer.MPEG_III;
         break;
     }
+
+    return Layer.unknown;
   }
 
   bool _processCrcCheck(Uint8List frameHeader) {
-    int mpegProtection = frameHeader[1] & mpegProtectionMask;
+    final mpegProtection = frameHeader[1] & mpegProtectionMask;
 
     return mpegProtection == mpegProtectionMask;
   }
 
   int _processBitRate(Uint8List frameHeader, Version version, Layer layer) {
-    int sampleInfo = frameHeader[2];
-    int bitRate = (sampleInfo & mpegBitRateMask) >> 4;
+    final sampleInfo = frameHeader[2];
+    final bitRate = (sampleInfo & mpegBitRateMask) >> 4;
     Map<int, int> bitRateMap;
 
     if (version == Version.MPEG_1) {
@@ -106,7 +110,7 @@ class MP3Processor {
   }
 
   SampleRate _processSampleRate(Uint8List frameHeader) {
-    int sampleRate = (frameHeader[2] & mpegSampleRateMask) >> 2;
+    final sampleRate = (frameHeader[2] & mpegSampleRateMask) >> 2;
     SampleRate rate;
 
     switch (sampleRate) {
@@ -125,16 +129,16 @@ class MP3Processor {
   }
 
   Duration _processDuration(int fileSizeBytes, int bitRate) {
-    int fileSizeBits = fileSizeBytes * 8;
-    int bitRateBits = bitRate * 1000;
+    final fileSizeBits = fileSizeBytes * 8;
+    final bitRateBits = bitRate * 1000;
 
-    double seconds = fileSizeBits / bitRateBits;
+    final seconds = fileSizeBits / bitRateBits;
 
     return Duration(seconds: seconds.floor());
   }
 
   ChannelMode _processChannelMode(Uint8List frameHeader) {
-    int channelMode = (frameHeader[3] & mpegChannelModeMask) >> 6;
+    final channelMode = (frameHeader[3] & mpegChannelModeMask) >> 6;
     ChannelMode mode;
 
     switch (channelMode) {
@@ -161,25 +165,25 @@ class MP3Processor {
     var firstFrameOffset = 0;
 
     // Does the MP3 start with an ID3 tag?
-    firstFrameOffset = latin1.decode(tag) == "ID3" ? _processID3(header) : 0;
+    firstFrameOffset = latin1.decode(tag) == 'ID3' ? _processID3(header) : 0;
 
-    Uint8List frameHeaderBytes =
+    final frameHeaderBytes =
         bytes.sublist(firstFrameOffset, firstFrameOffset + 10);
 
     // Ensure we have a valid MP3 frame
-    int frameSync1 = frameHeaderBytes[0] & frameSyncA;
-    int frameSync2 = frameHeaderBytes[1] & frameSyncB;
+    final frameSync1 = frameHeaderBytes[0] & frameSyncA;
+    final frameSync2 = frameHeaderBytes[1] & frameSyncB;
 
     if (frameSync1 == 0xFF && frameSync2 == 0xE0) {
-      int fileSize = bytes.length - firstFrameOffset;
+      final fileSize = bytes.length - firstFrameOffset;
 
-      Version version = _processMpegVersion(frameHeaderBytes);
-      Layer layer = _processMpegLayer(frameHeaderBytes);
-      bool crcCheck = _processCrcCheck(frameHeaderBytes);
-      int bitRate = _processBitRate(frameHeaderBytes, version, layer);
-      SampleRate sampleRate = _processSampleRate(frameHeaderBytes);
-      Duration duration = _processDuration(fileSize, bitRate);
-      ChannelMode mode = _processChannelMode(frameHeaderBytes);
+      final version = _processMpegVersion(frameHeaderBytes);
+      final layer = _processMpegLayer(frameHeaderBytes);
+      final crcCheck = _processCrcCheck(frameHeaderBytes);
+      final bitRate = _processBitRate(frameHeaderBytes, version, layer);
+      final sampleRate = _processSampleRate(frameHeaderBytes);
+      final duration = _processDuration(fileSize, bitRate);
+      final mode = _processChannelMode(frameHeaderBytes);
 
       return MP3Info(
         version,
