@@ -1,4 +1,4 @@
-// Copyright 2019 Ben Hills (ben.hills@amugofjava.me.uk).
+// Copyright 2019-2020 Ben Hills (ben.hills@amugofjava.me.uk).
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -140,6 +140,17 @@ const mpegSampleRateMask = 0x0C;
 /// can be one of stereo, joint stereo, dual channel or mono.
 const mpegChannelModeMask = 0xC0;
 
+/// The copyright flag is contained within bit 5 of byte four. If set the file
+/// is copyrighted.
+const mpegCopyrightMask = 0x08;
+
+/// The original flag is contained within bit 6 of byte four. If set the file
+/// is the original and not a copy.
+const mpegOriginalMask = 0x07;
+
+/// The emphasis value is contained within bits 1 & 2 of byte four.
+const mpegEmphasisMask = 0x03;
+
 /// Once masked, these constants can then be compared to the appropriate byte to
 /// determine the MPEG version, layer, sample rate etc.
 const mpegVersion1 = 0x18;
@@ -151,10 +162,15 @@ const layer2 = 0x04;
 const layer3 = 0x02;
 
 const sample44 = 0x00;
-const sample48 = 0x01;
-const sample32 = 0x02;
+const sample48 = 0x04;
+const sample32 = 0x08;
 
 const channelStereo = 0x00;
-const channelJointStereo = 0x01;
-const channelDualChannel = 0x02;
-const channelSingleChannel = 0x03;
+const channelJointStereo = 0x40;
+const channelDualChannel = 0x80;
+const channelSingleChannel = 0xC0;
+
+const emphasisNone = 0x00;
+const emphasis5015 = 0x01;
+const emphasisReserved = 0x02;
+const emphasisCCIT = 0x03;

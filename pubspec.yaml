@@ -1,6 +1,6 @@
 name: mp3_info
 description: A package for extracting key meta information from an MP3 file including sample rate, bitrate and duration. Written in pure Dart.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/amugofjava/mp3_info
 
 environment:

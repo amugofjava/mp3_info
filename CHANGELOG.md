@@ -1,3 +1,9 @@
+## 0.1.4
+
+- Added support for copyright flag.
+- Added support for original flag.
+- Added support for emphasis.
+
 ## 0.1.3
 
 - Fix new lints in Pedantic 1.9.0

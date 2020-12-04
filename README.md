@@ -44,9 +44,9 @@ main() {
   - [x] CRC check
   - [x] Channel mode
   - [ ] Mode extension
-  - [ ] Copyright flag
-  - [ ] Origin (original/copy))
-  - [ ] Emphasis
+  - [x] Copyright flag
+  - [x] Origin (original/copy))
+  - [x] Emphasis
 - [x] CBR (Constant Bitrate) support
 - [ ] VBR (Variable Bitrate) support
 - [ ] ID3 Tag support

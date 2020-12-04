@@ -1,4 +1,4 @@
-// Copyright 2019 Ben Hills (ben.hills@amugofjava.me.uk).
+// Copyright 2019-2020 Ben Hills (ben.hills@amugofjava.me.uk).
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
@@ -27,4 +27,11 @@ enum ChannelMode {
   joint_stereo,
   dual_channel,
   single_channel,
+}
+
+enum Emphasis {
+  none,
+  ms5015,
+  reserved,
+  ccit,
 }
