@@ -13,7 +13,7 @@ class MP3Info {
   final Layer layer;
 
   /// The [SampleRate] which is one of 32KHz, 44.1KHz or 48KHz
-  final SampleRate sampleRate;
+  final SampleRate? sampleRate;
 
   /// The [ChannelMode] which is one of stereo, joint stereo, dual channel or
   /// single channel..
@@ -38,7 +38,7 @@ class MP3Info {
   final bool original;
 
   /// The emphasis value for this mp3: none,50/15 ms or CCIT J.17.
-  final Emphasis emphasis;
+  final Emphasis? emphasis;
 
   MP3Info(
     this.version,

@@ -51,13 +51,10 @@ class MP3Processor {
     switch (version) {
       case mpegVersion1:
         return Version.MPEG_1;
-        break;
       case mpegVersion2:
         return Version.MPEG_2;
-        break;
       case mpegVersion2_5:
         return Version.MPEG_2_5;
-        break;
     }
 
     return Version.unknown;
@@ -69,13 +66,10 @@ class MP3Processor {
     switch (mpegLayer) {
       case layer1:
         return Layer.MPEG_I;
-        break;
       case layer2:
         return Layer.MPEG_II;
-        break;
       case layer3:
         return Layer.MPEG_III;
-        break;
     }
 
     return Layer.unknown;
@@ -87,7 +81,7 @@ class MP3Processor {
     return mpegProtection > 0;
   }
 
-  int _processBitRate(Uint8List frameHeader, Version version, Layer layer) {
+  int? _processBitRate(Uint8List frameHeader, Version version, Layer layer) {
     final sampleInfo = frameHeader[FRAME_3];
     final bitRate = (sampleInfo & mpegBitRateMask) >> 4; // Easier to compare if we shift the bits down.
     Map<int, int> bitRateMap;
@@ -113,9 +107,9 @@ class MP3Processor {
     return bitRateMap[bitRate];
   }
 
-  SampleRate _processSampleRate(Uint8List frameHeader) {
+  SampleRate? _processSampleRate(Uint8List frameHeader) {
     final sampleRate = (frameHeader[FRAME_3] & mpegSampleRateMask);
-    SampleRate rate;
+    SampleRate? rate;
 
     switch (sampleRate) {
       case sample32:
@@ -175,9 +169,9 @@ class MP3Processor {
     return original > 0;
   }
 
-  Emphasis _processEmphasis(Uint8List frameHeader) {
+  Emphasis? _processEmphasis(Uint8List frameHeader) {
     final emphasis = (frameHeader[FRAME_4] & mpegEmphasisMask);
-    Emphasis e;
+    Emphasis? e;
 
     switch (emphasis) {
       case emphasisNone:
@@ -217,7 +211,7 @@ class MP3Processor {
       final version = _processMpegVersion(frameHeaderBytes);
       final layer = _processMpegLayer(frameHeaderBytes);
       final crcCheck = _processCrcCheck(frameHeaderBytes);
-      final bitRate = _processBitRate(frameHeaderBytes, version, layer);
+      final bitRate = _processBitRate(frameHeaderBytes, version, layer)!;
       final sampleRate = _processSampleRate(frameHeaderBytes);
       final duration = _processDuration(fileSize, bitRate);
       final mode = _processChannelMode(frameHeaderBytes);

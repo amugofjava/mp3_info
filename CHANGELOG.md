@@ -1,3 +1,7 @@
+## 0.1.5
+
+- Migrate to null safe.
+
 ## 0.1.4
 
 - Added support for copyright flag.

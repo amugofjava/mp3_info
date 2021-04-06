@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:mp3_info/mp3_info.dart';
 
 void main() {
-  final mp3 = MP3Processor.fromFile(
-      File('test_files/test_128kpbs_441khz_stereo_10s.mp3'));
+  final mp3 = MP3Processor.fromFile(File('test_files/test_128kpbs_441khz_stereo_10s.mp3'));
 
   print('MP3: test_128kpbs_441khz_stereo_10s.mp3');
 
@@ -17,6 +16,9 @@ void main() {
       break;
     case SampleRate.rate_48000:
       print('Sample rate: 48KHz');
+      break;
+    default:
+      print('Unknown sample rate. Should not happen');
       break;
   }
 
