@@ -9,10 +9,12 @@ import 'package:mp3_info/src/exceptions/invalid_file_exception.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final tenSeconds = Duration(seconds: 10);
+  final tenSeconds = 10;
   final input_128kbps_441_stereo = File('test_files/test_128kpbs_441khz_stereo_10s.mp3');
-  final input_256kbps_441_mono_copyright_emphasis_none = File('test_files/test_256kbps_441khz_mono_emphasis_none_10s.mp3');
-  final input_256kbps_441_mono_copyright_emphasis_ccit = File('test_files/test_256kbps_441khz_mono_emphasis_ccit_10s.mp3');
+  final input_256kbps_441_mono_copyright_emphasis_none =
+      File('test_files/test_256kbps_441khz_mono_emphasis_none_10s.mp3');
+  final input_256kbps_441_mono_copyright_emphasis_ccit =
+      File('test_files/test_256kbps_441khz_mono_emphasis_ccit_10s.mp3');
   final input_256kbps_48_stereo = File('test_files/test_256kpbs_48khz_stereo_10s.mp3');
   final input_256kbps_48_mono = File('test_files/test_256kpbs_48khz_mono_10s.mp3');
   final input_sine_wav = File('test_files/test_sine_48khz_10s.wav');
@@ -35,7 +37,7 @@ void main() {
     });
 
     test('Duration 10 seconds', () {
-      expect(mp3.duration, tenSeconds);
+      expect(mp3.duration.inSeconds, tenSeconds);
     });
 
     test('Bitrate 128Kbps', () {
@@ -57,7 +59,7 @@ void main() {
     setUp(() {});
 
     test('Duration 10 seconds', () {
-      expect(mp3.duration, tenSeconds);
+      expect(mp3.duration.inSeconds, tenSeconds);
     });
 
     test('Bitrate 256Kbps', () {
@@ -91,7 +93,7 @@ void main() {
     setUp(() {});
 
     test('Duration 10 seconds', () {
-      expect(mp3.duration, tenSeconds);
+      expect(mp3.duration.inSeconds, tenSeconds);
     });
 
     test('Bitrate 256Kbps', () {
@@ -133,7 +135,7 @@ void main() {
     });
 
     test('Duration 10 seconds', () {
-      expect(mp3.duration, tenSeconds);
+      expect(mp3.duration.inSeconds, tenSeconds);
     });
 
     test('Bitrate 128Kbps', () {
@@ -178,7 +180,7 @@ void main() {
     });
 
     test('Duration 10 seconds', () {
-      expect(mp3.duration, tenSeconds);
+      expect(mp3.duration.inSeconds, tenSeconds);
     });
 
     test('Bitrate 128Kbps', () {
@@ -200,7 +202,8 @@ void main() {
     // When testing an exception the function to be tested cannot have any
     // parameters. Therefore we wrap in a closure to get around this.
     test('Process WAV file', () {
-      expect(() => MP3Processor.fromFile(input_sine_wav), throwsA(TypeMatcher<InvalidMP3FileException>()));
+      expect(() => MP3Processor.fromFile(input_sine_wav),
+          throwsA(TypeMatcher<InvalidMP3FileException>()));
     });
   });
 }
