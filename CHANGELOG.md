@@ -1,3 +1,7 @@
+## 0.2.1
+
+- Duration calculation changed from second to millisecond level (@sveinbjornt)
+
 ## 0.2.0
 
 - Migrate to null safe.

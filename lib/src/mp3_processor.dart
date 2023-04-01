@@ -15,10 +15,10 @@ import 'mp3.dart';
 /// Processes an MP3 file extracting key metadata information. The current version
 /// does not support extracting metadata from ID3 tags.
 class MP3Processor {
-  static int FRAME_1 = 0;
-  static int FRAME_2 = 1;
-  static int FRAME_3 = 2;
-  static int FRAME_4 = 3;
+  static int frame1 = 0;
+  static int frame2 = 1;
+  static int frame3 = 2;
+  static int frame4 = 3;
 
   /// Process the MP3 contained within the [File] instance.
   static MP3Info fromFile(File file) {
@@ -40,13 +40,14 @@ class MP3Processor {
   /// the ID3 tag space (excluding the 10 byte header itself. This function
   /// calculates the start of the first MP3 frame.
   int _processID3(Uint8List bytes) {
-    var headerSize = (bytes[6] << 21) + (bytes[7] << 14) + (bytes[8] << 7) + (bytes[9]);
+    var headerSize =
+        (bytes[6] << 21) + (bytes[7] << 14) + (bytes[8] << 7) + (bytes[9]);
 
     return headerSize + 10;
   }
 
   Version _processMpegVersion(Uint8List frameHeader) {
-    var version = frameHeader[FRAME_2] & mpegVersionMask;
+    var version = frameHeader[frame2] & mpegVersionMask;
 
     switch (version) {
       case mpegVersion1:
@@ -61,7 +62,7 @@ class MP3Processor {
   }
 
   Layer _processMpegLayer(Uint8List frameHeader) {
-    final mpegLayer = frameHeader[FRAME_2] & mpegLayerMask;
+    final mpegLayer = frameHeader[frame2] & mpegLayerMask;
 
     switch (mpegLayer) {
       case layer1:
@@ -76,15 +77,15 @@ class MP3Processor {
   }
 
   bool _processCrcCheck(Uint8List frameHeader) {
-    final mpegProtection = frameHeader[FRAME_2] & mpegProtectionMask;
+    final mpegProtection = frameHeader[frame2] & mpegProtectionMask;
 
     return mpegProtection > 0;
   }
 
   int? _processBitRate(Uint8List frameHeader, Version version, Layer layer) {
-    final sampleInfo = frameHeader[FRAME_3];
-    final bitRate =
-        (sampleInfo & mpegBitRateMask) >> 4; // Easier to compare if we shift the bits down.
+    final sampleInfo = frameHeader[frame3];
+    final bitRate = (sampleInfo & mpegBitRateMask) >>
+        4; // Easier to compare if we shift the bits down.
     Map<int, int> bitRateMap;
 
     if (version == Version.MPEG_1) {
@@ -109,7 +110,7 @@ class MP3Processor {
   }
 
   SampleRate? _processSampleRate(Uint8List frameHeader) {
-    final sampleRate = (frameHeader[FRAME_3] & mpegSampleRateMask);
+    final sampleRate = (frameHeader[frame3] & mpegSampleRateMask);
     SampleRate? rate;
 
     switch (sampleRate) {
@@ -138,7 +139,7 @@ class MP3Processor {
   }
 
   ChannelMode _processChannelMode(Uint8List frameHeader) {
-    final channelMode = (frameHeader[FRAME_4] & mpegChannelModeMask);
+    final channelMode = (frameHeader[frame4] & mpegChannelModeMask);
     ChannelMode mode;
 
     switch (channelMode) {
@@ -160,19 +161,19 @@ class MP3Processor {
   }
 
   bool _processCopyright(Uint8List frameHeader) {
-    final copyright = (frameHeader[FRAME_4] & mpegCopyrightMask);
+    final copyright = (frameHeader[frame4] & mpegCopyrightMask);
 
     return copyright > 0;
   }
 
   bool _processOriginal(Uint8List frameHeader) {
-    final original = (frameHeader[FRAME_4] & mpegOriginalMask);
+    final original = (frameHeader[frame4] & mpegOriginalMask);
 
     return original > 0;
   }
 
   Emphasis? _processEmphasis(Uint8List frameHeader) {
-    final emphasis = (frameHeader[FRAME_4] & mpegEmphasisMask);
+    final emphasis = (frameHeader[frame4] & mpegEmphasisMask);
     Emphasis? e;
 
     switch (emphasis) {
@@ -201,7 +202,8 @@ class MP3Processor {
     // Does the MP3 start with an ID3 tag?
     firstFrameOffset = latin1.decode(tag) == 'ID3' ? _processID3(header) : 0;
 
-    final frameHeaderBytes = bytes.sublist(firstFrameOffset, firstFrameOffset + 10);
+    final frameHeaderBytes =
+        bytes.sublist(firstFrameOffset, firstFrameOffset + 10);
 
     // Ensure we have a valid MP3 frame
     final frameSync1 = frameHeaderBytes[0] & frameSyncA;
@@ -234,7 +236,8 @@ class MP3Processor {
         emphasis,
       );
     } else {
-      throw InvalidMP3FileException('The file cannot be processed as it is not a valid MP3 file');
+      throw InvalidMP3FileException(
+          'The file cannot be processed as it is not a valid MP3 file');
     }
   }
 }

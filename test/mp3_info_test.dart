@@ -10,13 +10,16 @@ import 'package:test/test.dart';
 
 void main() {
   final tenSeconds = 10;
-  final input_128kbps_441_stereo = File('test_files/test_128kpbs_441khz_stereo_10s.mp3');
+  final input_128kbps_441_stereo =
+      File('test_files/test_128kpbs_441khz_stereo_10s.mp3');
   final input_256kbps_441_mono_copyright_emphasis_none =
       File('test_files/test_256kbps_441khz_mono_emphasis_none_10s.mp3');
   final input_256kbps_441_mono_copyright_emphasis_ccit =
       File('test_files/test_256kbps_441khz_mono_emphasis_ccit_10s.mp3');
-  final input_256kbps_48_stereo = File('test_files/test_256kpbs_48khz_stereo_10s.mp3');
-  final input_256kbps_48_mono = File('test_files/test_256kpbs_48khz_mono_10s.mp3');
+  final input_256kbps_48_stereo =
+      File('test_files/test_256kpbs_48khz_stereo_10s.mp3');
+  final input_256kbps_48_mono =
+      File('test_files/test_256kpbs_48khz_mono_10s.mp3');
   final input_sine_wav = File('test_files/test_sine_48khz_10s.wav');
 
   group('128Kbps 44.1KHz Dual channel', () {
@@ -54,7 +57,8 @@ void main() {
   });
 
   group('128Kbps 44.1KHz Joint stereo; copyrighted; emphasis none', () {
-    final mp3 = MP3Processor.fromFile(input_256kbps_441_mono_copyright_emphasis_none);
+    final mp3 =
+        MP3Processor.fromFile(input_256kbps_441_mono_copyright_emphasis_none);
 
     setUp(() {});
 
@@ -88,7 +92,8 @@ void main() {
   });
 
   group('128Kbps 44.1KHz Joint stereo; copyrighted; emphasis CCIT', () {
-    final mp3 = MP3Processor.fromFile(input_256kbps_441_mono_copyright_emphasis_ccit);
+    final mp3 =
+        MP3Processor.fromFile(input_256kbps_441_mono_copyright_emphasis_ccit);
 
     setUp(() {});
 
