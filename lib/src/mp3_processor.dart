@@ -83,7 +83,8 @@ class MP3Processor {
 
   int? _processBitRate(Uint8List frameHeader, Version version, Layer layer) {
     final sampleInfo = frameHeader[FRAME_3];
-    final bitRate = (sampleInfo & mpegBitRateMask) >> 4; // Easier to compare if we shift the bits down.
+    final bitRate =
+        (sampleInfo & mpegBitRateMask) >> 4; // Easier to compare if we shift the bits down.
     Map<int, int> bitRateMap;
 
     if (version == Version.MPEG_1) {
@@ -131,8 +132,9 @@ class MP3Processor {
     final bitRateBits = bitRate * 1000;
 
     final seconds = fileSizeBits / bitRateBits;
+    final milliseconds = (seconds * 1000).floor();
 
-    return Duration(seconds: seconds.floor());
+    return Duration(milliseconds: milliseconds);
   }
 
   ChannelMode _processChannelMode(Uint8List frameHeader) {
