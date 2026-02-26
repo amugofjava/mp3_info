@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Begin adding support for ID3 metadata.
+
 ## 0.2.1
 
 - Duration calculation changed from second to millisecond level (@sveinbjornt)

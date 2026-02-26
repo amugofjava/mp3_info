@@ -2,8 +2,10 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-/// The bitrates available differ depending upon the MPEG version and layer version
-const bitrate_v1_l1 = {
+/// Constants for MPEG audio frame bitrates, masks, and flag values.
+
+/// Bitrates for MPEG-1, Layer I.
+const bitrateV1L1 = {
   0x01: 32,
   0x02: 64,
   0x03: 96,
@@ -20,7 +22,8 @@ const bitrate_v1_l1 = {
   0x0E: 448,
 };
 
-const bitrate_v1_l2 = {
+/// Bitrates for MPEG-1, Layer II.
+const bitrateV1L2 = {
   0x01: 32,
   0x02: 48,
   0x03: 56,
@@ -37,7 +40,8 @@ const bitrate_v1_l2 = {
   0x0E: 384,
 };
 
-const bitrate_v1_l3 = {
+/// Bitrates for MPEG-1, Layer III.
+const bitrateV1L3 = {
   0x01: 32,
   0x02: 40,
   0x03: 48,
@@ -54,7 +58,8 @@ const bitrate_v1_l3 = {
   0x0E: 320,
 };
 
-const bitrate_v2_l1 = {
+/// Bitrates for MPEG-2/2.5, Layer I.
+const bitrateV2L1 = {
   0x01: 32,
   0x02: 48,
   0x03: 56,
@@ -71,7 +76,8 @@ const bitrate_v2_l1 = {
   0x0E: 256,
 };
 
-const bitrate_v2_l2 = {
+/// Bitrates for MPEG-2/2.5, Layer II.
+const bitrateV2L2 = {
   0x01: 8,
   0x02: 16,
   0x03: 24,
@@ -88,7 +94,8 @@ const bitrate_v2_l2 = {
   0x0E: 160,
 };
 
-const bitrate_v2_l3 = {
+/// Bitrates for MPEG-2/2.5, Layer III.
+const bitrateV2L3 = {
   0x01: 8,
   0x02: 16,
   0x03: 24,
@@ -154,23 +161,51 @@ const mpegEmphasisMask = 0x03;
 /// Once masked, these constants can then be compared to the appropriate byte to
 /// determine the MPEG version, layer, sample rate etc.
 const mpegVersion1 = 0x18;
+
+/// MPEG-2 version flag.
 const mpegVersion2 = 0x10;
+
+/// MPEG-2.5 version flag.
 const mpegVersion2_5 = 0x00;
 
+/// Layer I flag.
 const layer1 = 0x06;
+
+/// Layer II flag.
 const layer2 = 0x04;
+
+/// Layer III flag.
 const layer3 = 0x02;
 
+/// 44.1 KHz sample rate flag.
 const sample44 = 0x00;
+
+/// 48.0 KHz sample rate flag.
 const sample48 = 0x04;
+
+/// 32.0 KHz sample rate flag.
 const sample32 = 0x08;
 
+/// Stereo channel mode flag.
 const channelStereo = 0x00;
+
+/// Joint stereo channel mode flag.
 const channelJointStereo = 0x40;
+
+/// Dual channel mode flag.
 const channelDualChannel = 0x80;
+
+/// Single channel (mono) mode flag.
 const channelSingleChannel = 0xC0;
 
+/// No emphasis flag.
 const emphasisNone = 0x00;
+
+/// 50/15 ms emphasis flag.
 const emphasis5015 = 0x01;
+
+/// Reserved emphasis flag.
 const emphasisReserved = 0x02;
+
+/// CCITT J.17 emphasis flag.
 const emphasisCCIT = 0x03;

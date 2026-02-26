@@ -2,43 +2,48 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+import 'package:mp3_info/src/model/id3/id3.dart';
+
 import 'constants/client_constants.dart';
 
-/// An instance of MP3 metadata.
+/// Represents the metadata and audio properties of an MP3 file.
+///
+/// This class holds information extracted from both the MPEG audio frames
+/// and any embedded ID3 tags.
 class MP3Info {
-  /// The MPEG [Version] which is one of 1, 2, or 2.5.
+  /// The MPEG version (1, 2, or 2.5).
   final Version version;
 
-  /// The MPEG [Layer] which is one of I, II or III.
+  /// The MPEG layer (I, II, or III).
   final Layer layer;
 
-  /// The [SampleRate] which is one of 32KHz, 44.1KHz or 48KHz
+  /// The audio sample rate (e.g., 32KHz, 44.1KHz, 48KHz).
   final SampleRate? sampleRate;
 
-  /// The [ChannelMode] which is one of stereo, joint stereo, dual channel or
-  /// single channel..
+  /// The channel mode (stereo, joint stereo, dual channel, or single channel).
   final ChannelMode channelMode;
 
-  /// The bitrate which can range between 32bps and 448bps.
-  ///
-  /// The range available is dependent upon the MPEG [Version] and [Layer]]
-  /// version.
+  /// The bitrate of the audio in bits per second.
+  /// The available range depends on the MPEG [Version] and [Layer].
   final int bitrate;
 
-  /// Indicates whether the MP3 is protected by CRC
+  /// Indicates whether the MP3 is protected by a Cyclic Redundancy Check (CRC).
   final bool crc;
 
-  /// The calculated [Duration] of the MP3.
+  /// The calculated duration of the audio.
   final Duration duration;
 
-  /// Indicates whether MP3 is copyrighted
+  /// Indicates whether the MP3 is copyrighted.
   final bool copyrighted;
 
-  /// Indicates whether the files is the original or a copy
+  /// Indicates whether the file is an original or a copy.
   final bool original;
 
-  /// The emphasis value for this mp3: none,50/15 ms or CCIT J.17.
+  /// The emphasis applied to the audio (e.g., none, 50/15 ms, CCIT J.17).
   final Emphasis? emphasis;
+
+  /// Contains the parsed ID3 metadata, if present.
+  final ID3? id3;
 
   MP3Info(
     this.version,
@@ -51,5 +56,6 @@ class MP3Info {
     this.copyrighted,
     this.original,
     this.emphasis,
+    this.id3,
   );
 }

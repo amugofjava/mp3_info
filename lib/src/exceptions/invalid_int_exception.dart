@@ -2,13 +2,13 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-/// Exception thrown when an invalid MP3 file is encountered.
-class InvalidMP3FileException implements Exception {
+/// Exception thrown when an invalid integer is encountered.
+class InvalidIntException implements Exception {
   /// The error message associated with the exception.
   final String error;
 
-  InvalidMP3FileException(this.error);
+  InvalidIntException(this.error);
 
   @override
-  String toString() => 'InvalidMP3FileException: $error';
+  String toString() => 'InvalidIntException: $error';
 }

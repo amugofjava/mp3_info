@@ -9,7 +9,8 @@ import 'package:mp3_info/src/exceptions/invalid_file_exception.dart';
 import 'package:test/test.dart';
 
 void main() {
-  final tenSeconds = 10;
+  const tenSeconds = 10;
+
   final input_128kbps_441_stereo =
       File('test_files/test_128kpbs_441khz_stereo_10s.mp3');
   final input_256kbps_441_mono_copyright_emphasis_none =
@@ -28,11 +29,11 @@ void main() {
     setUp(() {});
 
     test('MPEG Version 1', () {
-      expect(mp3.version, Version.MPEG_1);
+      expect(mp3.version, Version.mpeg1);
     });
 
     test('MPEG Layer III', () {
-      expect(mp3.layer, Layer.MPEG_III);
+      expect(mp3.layer, Layer.mpegIII);
     });
 
     test('CRC set', () {
@@ -75,7 +76,7 @@ void main() {
     });
 
     test('Channel mode joint stereo', () {
-      expect(mp3.channelMode, ChannelMode.single_channel);
+      expect(mp3.channelMode, ChannelMode.singleChannel);
     });
 
     test('Is copyrighted', () {
@@ -110,7 +111,7 @@ void main() {
     });
 
     test('Channel mode joint stereo', () {
-      expect(mp3.channelMode, ChannelMode.single_channel);
+      expect(mp3.channelMode, ChannelMode.singleChannel);
     });
 
     test('Is copyrighted', () {
@@ -128,11 +129,11 @@ void main() {
     setUp(() {});
 
     test('MPEG Version 1', () {
-      expect(mp3.version, Version.MPEG_1);
+      expect(mp3.version, Version.mpeg1);
     });
 
     test('MPEG Layer III', () {
-      expect(mp3.layer, Layer.MPEG_III);
+      expect(mp3.layer, Layer.mpegIII);
     });
 
     test('CRC set', () {
@@ -173,11 +174,11 @@ void main() {
     setUp(() {});
 
     test('MPEG Version 1', () {
-      expect(mp3.version, Version.MPEG_1);
+      expect(mp3.version, Version.mpeg1);
     });
 
     test('MPEG Layer III', () {
-      expect(mp3.layer, Layer.MPEG_III);
+      expect(mp3.layer, Layer.mpegIII);
     });
 
     test('CRC set', () {
@@ -197,7 +198,7 @@ void main() {
     });
 
     test('Channel mode stereo', () {
-      expect(mp3.channelMode, ChannelMode.single_channel);
+      expect(mp3.channelMode, ChannelMode.singleChannel);
     });
   });
 
@@ -208,7 +209,7 @@ void main() {
     // parameters. Therefore we wrap in a closure to get around this.
     test('Process WAV file', () {
       expect(() => MP3Processor.fromFile(input_sine_wav),
-          throwsA(TypeMatcher<InvalidMP3FileException>()));
+          throwsA(const TypeMatcher<InvalidMP3FileException>()));
     });
   });
 }
