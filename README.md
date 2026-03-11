@@ -49,11 +49,12 @@ main() {
   - [x] Emphasis
 - [x] CBR (Constant Bitrate) support
 - [ ] VBR (Variable Bitrate) support
+- [ ] ID3 v1 Tag support
 - [ ] ID3 v2 Tag support
   - [ ] AENC Audio encryption
   - [ ] APIC Attached picture
   - [x] CHAP Chapters
-  - [ ] COMM Comments
+  - [x] COMM Comments
   - [ ] COMR Commercial frame
   - [ ] ENCR Encryption method registration
   - [ ] EQUA Equalization
@@ -74,45 +75,45 @@ main() {
   - [ ] RVRB Reverb
   - [ ] SYLT Synchronized lyric/text
   - [ ] SYTC Synchronized tempo codes
-  - [ ] TALB Album/Movie/Show title
-  - [ ] TBPM BPM (beats per minute)
-  - [ ] TCOM Composer
-  - [ ] TCON Content type
-  - [ ] TCOP Copyright message
-  - [ ] TDAT Date
-  - [ ] TDLY Playlist delay
-  - [ ] TENC Encoded by
-  - [ ] TEXT Lyricist/Text writer
-  - [ ] TFLT File type
-  - [ ] TIME Time
-  - [ ] TIT1 Content group description
+  - [x] TALB Album/Movie/Show title
+  - [x] TBPM BPM (beats per minute)
+  - [x] TCOM Composer
+  - [x] TCON Content type
+  - [x] TCOP Copyright message
+  - [x] TDAT Date
+  - [x] TDLY Playlist delay
+  - [x] TENC Encoded by
+  - [x] TEXT Lyricist/Text writer
+  - [x] TFLT File type
+  - [x] TIME Time
+  - [x] TIT1 Content group description
   - [x] TIT2 Title/songname/content description
-  - [ ] TIT3 Subtitle/Description refinement
-  - [ ] TKEY Initial key
-  - [ ] TLAN Language(s)
-  - [ ] TLEN Length
-  - [ ] TMED Media type
-  - [ ] TOAL Original album/movie/show title
-  - [ ] TOFN Original filename
-  - [ ] TOLY Original lyricist(s)/text writer(s)
-  - [ ] TOPE Original artist(s)/performer(s)
-  - [ ] TORY Original release year
-  - [ ] TOWN File owner/licensee
-  - [ ] TPE1 Lead performer(s)/Soloist(s)
-  - [ ] TPE2 Band/orchestra/accompaniment
-  - [ ] TPE3 Conductor/performer refinement
-  - [ ] TPE4 Interpreted, remixed, or otherwise modified by
-  - [ ] TPOS Part of a set
-  - [ ] TPUB Publisher
-  - [ ] TRCK Track number/Position in set
-  - [ ] TRDA Recording dates
-  - [ ] TRSN Internet radio station name
-  - [ ] TRSO Internet radio station owner
-  - [ ] TSIZ Size
-  - [ ] TSRC ISRC (international standard recording code)
-  - [ ] TSSE Software/Hardware and settings used for encoding
-  - [ ] TYER Year
-  - [ ] TXXX User defined text information frame
+  - [x] TIT3 Subtitle/Description refinement
+  - [x] TKEY Initial key
+  - [x] TLAN Language(s)
+  - [x] TLEN Length
+  - [x] TMED Media type
+  - [x] TOAL Original album/movie/show title
+  - [x] TOFN Original filename
+  - [x] TOLY Original lyricist(s)/text writer(s)
+  - [x] TOPE Original artist(s)/performer(s)
+  - [x] TORY Original release year
+  - [x] TOWN File owner/licensee
+  - [x] TPE1 Lead performer(s)/Soloist(s)
+  - [x] TPE2 Band/orchestra/accompaniment
+  - [x] TPE3 Conductor/performer refinement
+  - [x] TPE4 Interpreted, remixed, or otherwise modified by
+  - [x] TPOS Part of a set
+  - [x] TPUB Publisher
+  - [x] TRCK Track number/Position in set
+  - [x] TRDA Recording dates
+  - [x] TRSN Internet radio station name
+  - [x] TRSO Internet radio station owner
+  - [x] TSIZ Size
+  - [x] TSRC ISRC (international standard recording code)
+  - [x] TSSE Software/Hardware and settings used for encoding
+  - [x] TYER Year
+  - [x] TXXX User defined text information frame
   - [ ] UFID Unique file identifier
   - [ ] USER Terms of use
   - [ ] USLT Unsychronized lyric/text transcription

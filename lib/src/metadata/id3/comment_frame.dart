@@ -5,8 +5,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:mp3_info/src/model/id3/frame.dart';
-import 'package:mp3_info/src/model/id3/frame_header.dart';
+import 'package:mp3_info/src/metadata/id3/frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame_header.dart';
 
 /// Represents an ID3 text frame (e.g., TIT2, TPE1, COMM).
 ///
@@ -19,11 +19,8 @@ class CommentFrame extends Frame {
   /// The raw tag bytes.
   final Uint8List tags;
 
-  /// The parsed text value of the frame.
   String value = '';
-
   String language = '';
-
   String description = '';
 
   CommentFrame({required this.frameHeader, required this.tags});
@@ -33,12 +30,15 @@ class CommentFrame extends Frame {
   @override
   void parse() {
     final int encodingByte = frameHeader.data[0];
+
     language = latin1.decode(frameHeader.data.sublist(1, 4));
+
     final descBytes = terminatedStringBytes(
         encodingByte, frameHeader.data.sublist(4),
         includeTerminatorBytes: true);
     description = readString(frameHeader.data.sublist(4, 4 + descBytes),
         encoding: encodingByte);
+
     final valueBytes = frameHeader.data.sublist(4 + descBytes);
     value = readString(valueBytes, encoding: encodingByte);
   }

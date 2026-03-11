@@ -5,9 +5,9 @@
 import 'dart:typed_data';
 
 import 'package:mp3_info/src/extensions/parse_extension.dart';
-import 'package:mp3_info/src/model/id3/frame.dart';
-import 'package:mp3_info/src/model/id3/frame_header.dart';
-import 'package:mp3_info/src/model/id3/text_frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame_header.dart';
+import 'package:mp3_info/src/metadata/id3/text_frame.dart';
 
 /// A 'CHAP' (Chapter) frame in an ID3v2 tag.
 ///
@@ -76,6 +76,8 @@ class ChapterFrame extends Frame {
 
     do {
       var subFrame = Frame.fromBytes(offset: 0, bytes: bytesRemaining);
+      subFrame.parse();
+
       bytesRemaining = subFrame.remainingBytes;
 
       if (subFrame is TextFrame) {

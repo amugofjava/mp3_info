@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import 'package:mp3_info/src/model/id3/id3.dart';
+import 'package:mp3_info/src/metadata/id3/id3.dart';
 
 import 'constants/client_constants.dart';
 

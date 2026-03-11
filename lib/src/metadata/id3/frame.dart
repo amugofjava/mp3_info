@@ -5,11 +5,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:mp3_info/src/model/id3/chapter_frame.dart';
-import 'package:mp3_info/src/model/id3/comment_frame.dart';
-import 'package:mp3_info/src/model/id3/frame_header.dart';
-import 'package:mp3_info/src/model/id3/text_frame.dart';
-import 'package:mp3_info/src/model/id3/unsupported_frame.dart';
+import 'package:mp3_info/src/metadata/id3/chapter_frame.dart';
+import 'package:mp3_info/src/metadata/id3/comment_frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame_header.dart';
+import 'package:mp3_info/src/metadata/id3/text_frame.dart';
+import 'package:mp3_info/src/metadata/id3/unsupported_frame.dart';
 
 /// An abstract representation of an ID3 frame.
 ///
@@ -44,8 +44,6 @@ abstract class Frame {
   /// appropriate concrete [Frame] implementation (e.g., [ChapterFrame], [TextFrame]).
   factory Frame.fromBytes({required int offset, required Uint8List bytes}) {
     final frameHeader = FrameHeader(offset: offset, bytes: bytes);
-
-    print(frameHeader.name);
 
     switch (frameHeader.name) {
       case 'CHAP':

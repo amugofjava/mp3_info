@@ -4,8 +4,8 @@
 
 import 'dart:typed_data';
 
-import 'package:mp3_info/src/model/id3/frame.dart';
-import 'package:mp3_info/src/model/id3/frame_header.dart';
+import 'package:mp3_info/src/metadata/id3/frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame_header.dart';
 
 /// A placeholder for ID3 frames that are not explicitly supported by the library.
 ///

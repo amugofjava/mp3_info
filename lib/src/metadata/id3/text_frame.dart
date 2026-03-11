@@ -4,8 +4,8 @@
 
 import 'dart:typed_data';
 
-import 'package:mp3_info/src/model/id3/frame.dart';
-import 'package:mp3_info/src/model/id3/frame_header.dart';
+import 'package:mp3_info/src/metadata/id3/frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame_header.dart';
 
 /// Represents an ID3 text frame (e.g., TIT2, TPE1, COMM).
 ///

@@ -10,13 +10,15 @@ import 'package:http/http.dart' as http;
 import 'package:mp3_info/src/constants/mp3_constants.dart';
 import 'package:mp3_info/src/exceptions/invalid_file_exception.dart';
 import 'package:mp3_info/src/extensions/parse_extension.dart';
-import 'package:mp3_info/src/model/id3/chapter_frame.dart';
-import 'package:mp3_info/src/model/id3/frame.dart';
-import 'package:mp3_info/src/model/id3/id3_chapter.dart';
-import 'package:mp3_info/src/model/id3/text_frame.dart';
+import 'package:mp3_info/src/metadata/id3/chapter_frame.dart';
+import 'package:mp3_info/src/metadata/id3/comment_frame.dart';
+import 'package:mp3_info/src/metadata/id3/frame.dart';
+import 'package:mp3_info/src/metadata/id3/id3.dart';
+import 'package:mp3_info/src/metadata/model/chapter.dart';
+import 'package:mp3_info/src/metadata/id3/text_frame.dart';
+import 'package:mp3_info/src/metadata/model/comment.dart';
 
 import 'constants/client_constants.dart';
-import 'model/id3/id3.dart';
 import 'mp3.dart';
 
 /// A utility class for processing MP3 files and extracting metadata.
@@ -148,20 +150,94 @@ class MP3Processor {
                   endTime: frame.endTime,
                   title: frame.chapterName,
                 ));
+              case CommentFrame():
+                id3.comment = Comment(
+                  frame.value,
+                  frame.language,
+                  frame.description,
+                );
               case TextFrame():
                 switch (frame.frameHeader.name) {
-                  case 'COMM':
-                    id3.comment = frame.value;
                   case 'IPLS':
                     id3.people = frame.value;
-                  case 'TPE1':
-                    id3.artist = frame.value;
                   case 'TALB':
                     id3.album = frame.value;
-                  case 'TCOP':
+                  case 'TBPM':
+                    id3.bpm = frame.value;
+                  case 'TCOM':
                     id3.copyright = frame.value;
+                  case 'TCON':
+                    id3.genre = frame.value;
+                  case 'TCOP':
+                    id3.composer = frame.value;
+                  case 'TDAT':
+                    id3.date = frame.value;
+                  case 'TDLY':
+                    id3.delay = frame.value;
+                  case 'TENC':
+                    id3.encodedBy = frame.value;
+                  case 'TEXT':
+                    id3.writer = frame.value;
+                  case 'TFLT':
+                    id3.fileType = frame.value;
+                  case 'TIME':
+                    id3.time = frame.value;
+                  case 'TIT1':
+                    id3.groupDescription = frame.value;
                   case 'TIT2':
                     id3.title = frame.value;
+                  case 'TIT3':
+                    id3.description = frame.value;
+                  case 'TKEY':
+                    id3.key = frame.value;
+                  case 'TLAN':
+                    id3.key = frame.value;
+                  case 'TLEN':
+                    id3.key = frame.value;
+                  case 'TMED':
+                    id3.mediaType = frame.value;
+                  case 'TOAL':
+                    id3.originalTitle = frame.value;
+                  case 'TOFN':
+                    id3.originalFilename = frame.value;
+                  case 'TOLY':
+                    id3.originalWriter = frame.value;
+                  case 'TOPE':
+                    id3.originalArtist = frame.value;
+                  case 'TORY':
+                    id3.originalYear = frame.value;
+                  case 'TOWN':
+                    id3.owner = frame.value;
+                  case 'TPE1':
+                    id3.artist = frame.value;
+                  case 'TPE2':
+                    id3.albumArtist = frame.value;
+                  case 'TPE3':
+                    id3.performer = frame.value;
+                  case 'TPE4':
+                    id3.modifiedBy = frame.value;
+                  case 'TPOS':
+                    id3.disc = frame.value;
+                  case 'TPUB':
+                    id3.publisher = frame.value;
+                  case 'TRCK':
+                    id3.track = frame.value;
+                  case 'TRDA':
+                    id3.recordingDates = frame.value;
+                  case 'TRSN':
+                    id3.stationName = frame.value;
+                  case 'TRSO':
+                    id3.stationOwner = frame.value;
+                  case 'TSIZ':
+                    id3.size = frame.value;
+                  case 'TSRC':
+                    id3.recordingCode = frame.value;
+                  case 'TSSE':
+                    id3.encodingSettings = frame.value;
+                  case 'TYER':
+                    id3.year = frame.value;
+                  case 'TXXX':
+                    id3.information = frame.value;
                 }
             }
 
