@@ -17,12 +17,16 @@ extension ByteParser on List<int> {
 
     if (length == 4) {
       if (syncSafe) {
-        value = ((this[0] & 0x7f) << 21) + ((this[1] & 0x7f) << 14) + ((this[2] & 0x7f) << 7) + (this[3] & 0x7f);
+        value = ((this[0] & 0x7f) << 21) +
+            ((this[1] & 0x7f) << 14) +
+            ((this[2] & 0x7f) << 7) +
+            (this[3] & 0x7f);
       } else {
         value = (this[0] << 24) + (this[1] << 16) + (this[2] << 8) + (this[3]);
       }
     } else {
-      throw InvalidIntException('Byte list contains an invalid number of bytes: $length. Expected 4');
+      throw InvalidIntException(
+          'Byte list contains an invalid number of bytes: $length. Expected 4');
     }
 
     return value;

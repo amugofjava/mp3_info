@@ -1,6 +1,7 @@
 # MP3 Info
 Processes an MP3 file to extract key meta information such as MPEG version,
-MPEG layer version, bitrate, sample rate and duration.
+MPEG layer version, bitrate, sample rate and duration. Can optionally process
+ID3 tags.
 
 ## Usage
 
