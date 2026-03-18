@@ -1,3 +1,7 @@
+## 0.2.3
+
+- Bug fix: handle offset frame sync.
+
 ## 0.2.2
 
 - Begin adding support for ID3 metadata.

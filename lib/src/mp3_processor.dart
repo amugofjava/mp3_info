@@ -408,6 +408,21 @@ class MP3Processor {
     return e;
   }
 
+  int _findNextFrameSync(Uint8List bytes) {
+    int result = -1;
+
+    for (var b = 0; b < bytes.length - 1; b++) {
+      final frameSync1 = bytes[b] & frameSyncA;
+      final frameSync2 = bytes[b+1] & frameSyncB;
+
+      if (frameSync1 == 0xFF && frameSync2 == 0xE0) {
+        result = b;
+      }
+    }
+
+    return result;
+  }
+
   /// Processes raw bytes to extract [MP3Info].
   MP3Info _processBytes(Uint8List bytes, {bool includeID3 = true}) {
     var firstFrameOffset = 0;
@@ -425,12 +440,11 @@ class MP3Processor {
       throw InvalidMP3FileException('File is too short to be a valid MP3 file');
     }
 
-    final frameHeaderBytes =
-        bytes.sublist(firstFrameOffset, firstFrameOffset + 10);
-    final frameSync1 = frameHeaderBytes[0] & frameSyncA;
-    final frameSync2 = frameHeaderBytes[1] & frameSyncB;
+    final nextFrame = _findNextFrameSync(bytes);
 
-    if (frameSync1 == 0xFF && frameSync2 == 0xE0) {
+    if (nextFrame != -1) {
+      final frameHeaderBytes =
+          bytes.sublist(nextFrame, nextFrame + 10);
       final fileSize = bytes.length - firstFrameOffset;
       final version = _processMpegVersion(frameHeaderBytes);
       final layer = _processMpegLayer(frameHeaderBytes);
