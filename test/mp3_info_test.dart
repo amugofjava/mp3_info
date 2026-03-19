@@ -21,7 +21,7 @@ void main() {
       File('test_files/test_256kpbs_48khz_stereo_10s.mp3');
   final input_256kbps_48_mono =
       File('test_files/test_256kpbs_48khz_mono_10s.mp3');
-  final input_sine_wav = File('test_files/test_sine_48khz_10s.wav');
+  final input_text_file = File('test_files/test_text.txt');
 
   group('128Kbps 44.1KHz Dual channel', () {
     final mp3 = MP3Processor.fromFile(input_128kbps_441_stereo);
@@ -208,7 +208,7 @@ void main() {
     // When testing an exception the function to be tested cannot have any
     // parameters. Therefore we wrap in a closure to get around this.
     test('Process WAV file', () {
-      expect(() => MP3Processor.fromFile(input_sine_wav),
+      expect(() => MP3Processor.fromFile(input_text_file),
           throwsA(const TypeMatcher<InvalidMP3FileException>()));
     });
   });
